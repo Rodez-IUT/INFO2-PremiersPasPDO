@@ -1,0 +1,11 @@
+INSERT INTO my_activities.users (username, id, email, status_id) VALUES ('bobdeniro', 1, 'bobdeniro@hollywood.com', 1);
+INSERT INTO my_activities.users (username, id, email, status_id) VALUES ('eliseB', 2, 'eliseb@ihm.com', 1);
+INSERT INTO my_activities.users (username, id, email, status_id) VALUES ('arthurH', 3, 'arthurH@michelin.com', 1);
+INSERT INTO my_activities.users (username, id, email, status_id) VALUES ('wandaL', 4, 'wandal@lalaland.com', 2);
+INSERT INTO my_activities.users (username, id, email, status_id) VALUES ('paulsimon', 5, 'paulsimon@guitare.org', 2);
+INSERT INTO my_activities.users (username, id, email, status_id) VALUES ('jessicaA', 6, 'jessicaa@hollywood.com', 2);
+INSERT INTO my_activities.users (username, id, email, status_id) VALUES ('steveM', 7, 'stevem@cars.com', 2);
+INSERT INTO my_activities.users (username, id, email, status_id) VALUES ('evaM', 8, 'evam@movieland.com', 2);
+INSERT INTO my_activities.users (username, id, email, status_id) VALUES ('alpacino', 9, 'alpacino@moviecountry.com', 2);
+INSERT INTO my_activities.users (username, id, email, status_id) VALUES ('eddym', 10, 'eddym@beverly.com', 3);
+INSERT INTO my_activities.users (username, id, email, status_id) VALUES ('francoises', 11, 'francoises@quaidesbrumes.org', 3);
