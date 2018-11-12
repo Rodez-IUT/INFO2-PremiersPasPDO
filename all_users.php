@@ -59,7 +59,7 @@ try {
 <?php
 $start_letter = htmlspecialchars($_GET['start_letter'].'%');
 $status_id = (int)$_GET["status_id"];
-$sql = "select users.id as user_id, username, email, s.name as status from users join status s on users.status_id = s.id where username like :start_letter and status_id = :status_id order by username";
+$sql = "select users.id as user_id, username, email, s.name as status, s.id as status_id from users join status s on users.status_id = s.id where username like :start_letter and status_id = :status_id order by username";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(['start_letter' => $start_letter, 'status_id' => $status_id]);
 ?>
@@ -69,6 +69,7 @@ $stmt->execute(['start_letter' => $start_letter, 'status_id' => $status_id]);
         <th>Username</th>
         <th>Email</th>
         <th>Status</th>
+        <th></th>
     </tr>
     <?php while ($row = $stmt->fetch()) { ?>
         <tr>
@@ -76,6 +77,11 @@ $stmt->execute(['start_letter' => $start_letter, 'status_id' => $status_id]);
             <td><?php echo $row['username'] ?></td>
             <td><?php echo $row['email'] ?></td>
             <td><?php echo $row['status'] ?></td>
+            <td>
+                <?php if ($row['status_id'] != 3) { ?>
+                <a href="all_users.php?status_id=3&user_id=<?php echo $row['user_id']?>&action=askDeletion">Ask deletion</a>
+                <?php } ?>
+            </td>
         </tr>
     <?php } ?>
 </table>
