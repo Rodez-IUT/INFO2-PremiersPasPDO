@@ -1,13 +1,14 @@
 <?php
 require_once 'UsersDAF.php';
+require_once '../util/Input.php';
 
 /**
  * @param $pdo the pdo object
  */
 function defaultAction($pdo) {
     global $searchStmt ;
-    $status_id = (int)$_GET['status_id'] ?: 2 ;
-    $start_letter = htmlspecialchars($_GET['start_letter'].'%') ?: '%';
+    $status_id = (int)get('status_id') ?: 2 ;
+    $start_letter = htmlspecialchars(get('start_letter').'%') ?: '%';
     $searchStmt = findUsersByUsernameAndStatus($pdo, $start_letter, $status_id) ;
 };
 
@@ -15,7 +16,7 @@ function defaultAction($pdo) {
  * @param $pdo the pdo object
  */
 function askDeletion($pdo) {
-    $user_id = (int)$_GET["user_id"];
+    $user_id = (int)get("user_id");
     // ask deletion
     askUserDeletion($pdo, $user_id);
     // update user list

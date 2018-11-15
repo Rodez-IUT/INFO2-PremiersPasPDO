@@ -1,8 +1,9 @@
 <?php
 require_once 'DataSource.php';
+require_once 'Input.php';
 
 // set action to trigger
-$action = $_GET['action'] ?: 'defaultAction';
+$action = get('action') ?: 'defaultAction';
 
 // trigger the appropriate action
 $action(getPDO());
