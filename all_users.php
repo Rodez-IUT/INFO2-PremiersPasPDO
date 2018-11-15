@@ -40,24 +40,28 @@ try {
     throw new PDOException($e->getMessage(), (int)$e->getCode());
 }
 
+function get($name) {
+    return isset($_GET[$name]) ? $_GET[$name] : null;
+}
+
 ?>
 
 <h1>All Users</h1>
 
 <form action="all_users.php" method="get">
     Start with letter:
-    <input name="start_letter" type="text" value="<?php echo $_GET["start_letter"] ?>">
+    <input name="start_letter" type="text" value="<?php echo get("start_letter") ?>">
     and status is:
     <select name="status_id">
-        <option value="1" <?php if ($_GET["status_id"] == 1) echo 'selected' ?>>Waiting for account validation</option>
-        <option value="2" <?php if ($_GET["status_id"] == 2) echo 'selected' ?>>Active account</option>
+        <option value="1" <?php if (get("status_id") == 1) echo 'selected' ?>>Waiting for account validation</option>
+        <option value="2" <?php if (get("status_id") == 2) echo 'selected' ?>>Active account</option>
     </select>
     <input type="submit" value="OK">
 </form>
 
 <?php
-$start_letter = htmlspecialchars($_GET["start_letter"]);
-$status_id = (int)$_GET["status_id"];
+$start_letter = htmlspecialchars(get("start_letter"));
+$status_id = (int)get("status_id");
 $sql = "select users.id as user_id, username, email, s.name as status from users join status s on users.status_id = s.id where username like '$start_letter%' and status_id = $status_id order by username";
 $stmt = $pdo->query($sql);
 ?>
