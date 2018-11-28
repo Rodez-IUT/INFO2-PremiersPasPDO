@@ -43,8 +43,12 @@ try {
     throw new PDOException($e->getMessage(), (int)$e->getCode());
 }
 
+function get($name) {
+    return isset($_GET[$name]) ? $_GET[$name] : null;
+}
+
 // set action to trigger
-$action = $_GET['action'] ?: 'searchUsers';
+$action = get('action') ?: 'searchUsers';
 
 $searchStmt = null;
 
@@ -53,8 +57,8 @@ $action($pdo);
 
 function searchUsers($pdo){
     global $searchStmt;
-    $status_id = (int)$_GET['status_id'] ?: 2;
-    $start_letter = htmlspecialchars($_GET['start_letter'] . '%') ?: '%';
+    $status_id = (int)get('status_id') ?: 2;
+    $start_letter = htmlspecialchars(get('start_letter') . '%') ?: '%';
     $sql = "select users.id as user_id, username, email, s.name as status, s.id as status_id 
             from users join status s on users.status_id = s.id 
             where username like :start_letter and status_id = :status_id order by username";
@@ -62,10 +66,8 @@ function searchUsers($pdo){
     $searchStmt->execute(['start_letter' => $start_letter, 'status_id' => $status_id]);
 }
 
-;
-
 function askDeletion($pdo){
-    $user_id = (int)$_GET["user_id"];
+    $user_id = (int)get("user_id");
     // insert log
     $sql2 = "insert into action_log (action_date, action_name, user_id) 
               values (CURRENT_TIME(),'askDeletion',?)";
@@ -81,6 +83,7 @@ function askDeletion($pdo){
 
 ?>
 
+
 <h1>All Users</h1>
 
 <form action="all_users.php" method="get">
@@ -89,9 +92,9 @@ function askDeletion($pdo){
     <input name="start_letter" type="text" value="<?php echo $_GET["start_letter"] ?>">
     and status is:
     <select name="status_id">
-        <option value="1" <?php if ($_GET['status_id'] == 1) echo 'selected' ?>>Waiting for account validation</option>
-        <option value="2" <?php if ($_GET['status_id'] == 2) echo 'selected' ?>>Active account</option>
-        <option value="3" <?php if ($_GET['status_id'] == 3) echo 'selected' ?>>Waiting for account deletion</option>
+        <option value="1" <?php if (get('status_id') == 1) echo 'selected' ?>>Waiting for account validation</option>
+        <option value="2" <?php if (get('status_id') == 2) echo 'selected' ?>>Active account</option>
+        <option value="3" <?php if (get('status_id') == 3) echo 'selected' ?>>Waiting for account deletion</option>
     </select>
     <input type="submit" value="OK">
 </form>
