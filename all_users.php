@@ -23,8 +23,9 @@
 $searchStmt = null ;
 
 // link to controllers
-require_once 'users/UsersController.php';
-require_once 'util/DefaultController.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/users/UsersController.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/util/DefaultController.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/util/Input.php';
 
 ?>
 
@@ -36,9 +37,9 @@ require_once 'util/DefaultController.php';
     <input name="start_letter" type="text" value="<?php echo $_GET["start_letter"] ?>">
     and status is:
     <select name="status_id">
-        <option value="1" <?php if ($_GET['status_id'] == 1) echo 'selected' ?>>Waiting for account validation</option>
-        <option value="2" <?php if ($_GET['status_id'] == 2) echo 'selected' ?>>Active account</option>
-        <option value="3" <?php if ($_GET['status_id'] == 3) echo 'selected' ?>>Waiting for account deletion</option>
+        <option value="1" <?php if (get('status_id') == 1) echo 'selected' ?>>Waiting for account validation</option>
+        <option value="2" <?php if (get('status_id') == 2) echo 'selected' ?>>Active account</option>
+        <option value="3" <?php if (get('status_id') == 3) echo 'selected' ?>>Waiting for account deletion</option>
     </select>
     <input type="submit" value="OK">
 </form>
