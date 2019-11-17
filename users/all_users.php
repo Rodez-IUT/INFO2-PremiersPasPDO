@@ -23,9 +23,9 @@
 $searchStmt = null ;
 
 // link to controllers
-require_once $_SERVER['DOCUMENT_ROOT'].'/users/UsersController.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/util/DefaultController.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/util/Input.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/users/UsersController.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/util/my_activities.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/util/input.php';
 
 ?>
 

@@ -1,6 +1,6 @@
 <?php
 require_once 'UsersDAF.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/util/Input.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/util/input.php';
 
 /**
  * @param $pdo the pdo object
