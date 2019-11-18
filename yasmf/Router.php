@@ -2,34 +2,25 @@
 
 namespace yasmf;
 
-class Rooter {
+use controllers;
 
-    private $dataSource;
+class Router
+{
 
-    public function __construct($dataSource)
+    public function route($dataSource)
     {
-        $this->dataSource = $dataSource;
-    }
 
-    public function route($dataSource) {
-        // Create a model
-        $model = new model(getPDO());
-
-        // set controller with the current model
-        $controllerName = get('controller') + "_controller";
-        $controller = new $controllerName($model);
+        // set controllers with the current model
+        $controllerName = "controllers\\" . HttpHelper::get('controller') . "Controller";
+        $controller = new $controllerName();
         // set action to trigger
-        $action = get('action') ?: 'defaultAction';
+        $action = HttpHelper::get('action') ?: 'defaultAction';
 
         // trigger the appropriate action and get the resulted view
-        $view = $controller->$action($model);
+        $view = $controller->$action($dataSource->getPdo());
 
         // render the view
-        $view->render($model);
-    }
-
-    private function get($name) {
-        return isset($_GET[$name]) ? $_GET[$name] : null;
+        $view->render();
     }
 }
 

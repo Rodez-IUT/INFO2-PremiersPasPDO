@@ -4,6 +4,8 @@
 namespace yasmf;
 
 
+use PDO;
+
 class DataSource
 {
     private $host;

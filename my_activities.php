@@ -1,9 +1,19 @@
 <?php
-require_once 'data_source.php';
-require_once 'input.php';
 
-// set action to trigger
-$action = get('action') ?: 'defaultAction';
+spl_autoload_extensions(".php");
+spl_autoload_register();
 
-// trigger the appropriate action
-$action(getPDO());
+use yasmf\DataSource;
+use yasmf\Router;
+
+$dataSource = new DataSource(
+    $host = 'localhost',
+    $port = '8889',
+    $db = 'my_activities',
+    $user = 'root',
+    $pass = 'root',
+    $charset = 'utf8mb4'
+);
+
+$router = new Router() ;
+$router->route($dataSource);

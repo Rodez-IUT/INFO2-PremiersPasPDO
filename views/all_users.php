@@ -18,18 +18,26 @@
 </head>
 <body>
 
+<?php
+spl_autoload_extensions(".php");
+spl_autoload_register();
+
+use yasmf\HttpHelper;
+
+?>
+
 <h1>All Users</h1>
 
 <form action="my_activities.php" method="get">
     <input hidden name="action" value="defaultAction">
     <input hidden name="controller" value="Users">
     Start with letter:
-    <input name="start_letter" type="text" value="<?php echo $_GET["start_letter"] ?>">
+    <input name="start_letter" type="text" value="<?php echo HttpHelper::get('start_letter') ?>">
     and status is:
     <select name="status_id">
-        <option value="1" <?php if (get('status_id') == 1) echo 'selected' ?>>Waiting for account validation</option>
-        <option value="2" <?php if (get('status_id') == 2) echo 'selected' ?>>Active account</option>
-        <option value="3" <?php if (get('status_id') == 3) echo 'selected' ?>>Waiting for account deletion</option>
+        <option value="1" <?php if (HttpHelper::get('status_id') == 1) echo 'selected' ?>>Waiting for account validation</option>
+        <option value="2" <?php if (HttpHelper::get('status_id') == 2) echo 'selected' ?>>Active account</option>
+        <option value="3" <?php if (HttpHelper::get('status_id') == 3) echo 'selected' ?>>Waiting for account deletion</option>
     </select>
     <input type="submit" value="OK">
 </form>
@@ -51,7 +59,7 @@
             <td><?php echo $row['status'] ?></td>
             <td>
                 <?php if ($row['status_id'] != 3) { ?>
-                <a href="all_users.php?status_id=3&user_id=<?php echo $row['user_id']?>&action=askDeletion">Ask deletion</a>
+                <a href="my_activities.php?status_id=3&user_id=<?php echo $row['user_id']?>&controller=Users&action=askDeletion">Ask deletion</a>
                 <?php } ?>
             </td>
         </tr>

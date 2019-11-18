@@ -1,16 +1,17 @@
 <?php
 
 
-namespace users;
+namespace services;
 
+use PDOException;
 
 class UsersService
 {
     /**
-     * @param $pdo the pdo object
-     * @param $likeUsername the string the username should contain
-     * @param $statusId the status id
-     * @return the statement referencing the result set
+     * @param $pdo \PDO the pdo object
+     * @param $likeUsername String the string the username should contain
+     * @param $statusId Int the status id
+     * @return \PDOStatement the statement referencing the result set
      */
     public function findUsersByUsernameAndStatus($pdo, $likeUsername, $statusId)
     {
@@ -23,8 +24,8 @@ class UsersService
     }
 
     /**
-     * @param $pdo the pdo object
-     * @param $userId the id of the user to be deleted
+     * @param $pdo \PDO the pdo object
+     * @param $userId Int the id of the user to be deleted
      */
     public function askUserDeletion($pdo, $userId)
     {
