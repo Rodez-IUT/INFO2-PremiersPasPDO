@@ -15,8 +15,8 @@ class UsersController {
     }
 
     public function defaultAction($pdo) {
-        $status_id = (int)HttpHelper::get('status_id') ?: 2 ;
-        $start_letter = htmlspecialchars(HttpHelper::get('start_letter').'%') ?: '%';
+        $status_id = (int)HttpHelper::getParam('status_id') ?: 2 ;
+        $start_letter = htmlspecialchars(HttpHelper::getParam('start_letter').'%') ?: '%';
         $searchStmt = $this->usersService->findUsersByUsernameAndStatus($pdo, $start_letter, $status_id) ;
         $view = new View("DUTInfo2/views/all_users");
         $view->setVar('searchStmt',$searchStmt);
@@ -24,7 +24,7 @@ class UsersController {
     }
 
     public function askDeletion($pdo) {
-        $user_id = (int)HttpHelper::get("user_id");
+        $user_id = (int)HttpHelper::getParam("user_id");
         // ask deletion
         $this->usersService->askUserDeletion($pdo, $user_id);
         // update user list

@@ -32,12 +32,12 @@ use yasmf\HttpHelper;
     <input hidden name="action" value="defaultAction">
     <input hidden name="controller" value="Users">
     Start with letter:
-    <input name="start_letter" type="text" value="<?php echo HttpHelper::get('start_letter') ?>">
+    <input name="start_letter" type="text" value="<?php echo HttpHelper::getParam('start_letter') ?>">
     and status is:
     <select name="status_id">
-        <option value="1" <?php if (HttpHelper::get('status_id') == 1) echo 'selected' ?>>Waiting for account validation</option>
-        <option value="2" <?php if (HttpHelper::get('status_id') == 2) echo 'selected' ?>>Active account</option>
-        <option value="3" <?php if (HttpHelper::get('status_id') == 3) echo 'selected' ?>>Waiting for account deletion</option>
+        <option value="1" <?php if (HttpHelper::getParam('status_id') == 1) echo 'selected' ?>>Waiting for account validation</option>
+        <option value="2" <?php if ((HttpHelper::getParam('status_id') == 2) || (HttpHelper::getParam('status_id') == null)) echo 'selected' ?>>Active account</option>
+        <option value="3" <?php if (HttpHelper::getParam('status_id') == 3) echo 'selected' ?>>Waiting for account deletion</option>
     </select>
     <input type="submit" value="OK">
 </form>
