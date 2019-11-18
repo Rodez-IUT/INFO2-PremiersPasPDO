@@ -18,21 +18,11 @@
 </head>
 <body>
 
-<?php
-// set globlal variable needed for the display
-$searchStmt = null ;
-
-// link to controllers
-require_once $_SERVER['DOCUMENT_ROOT'] . '/users/UsersController.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/util/my_activities.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/util/input.php';
-
-?>
-
 <h1>All Users</h1>
 
-<form action="all_users.php" method="get">
+<form action="my_activities.php" method="get">
     <input hidden name="action" value="defaultAction">
+    <input hidden name="controller" value="Users">
     Start with letter:
     <input name="start_letter" type="text" value="<?php echo $_GET["start_letter"] ?>">
     and status is:
