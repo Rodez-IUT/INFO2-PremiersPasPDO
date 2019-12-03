@@ -25,6 +25,22 @@ class HomeController {
         return $view;
     }
 
+    function editUser($pdo) {
+        $user_id = (int)HttpHelper::getParam('user_id');
+        $user = $this->usersService->findUserById($pdo, $user_id);
+        $view = new View("DUTInfo2/views/user");
+        $view->setVar('user',$user);
+        return $view;
+    }
+
+    function saveUser($pdo) {
+        $user_id = (int)HttpHelper::getParam('user_id');
+        $username = HttpHelper::getParam('username');
+        $user = $this->usersService->saveUsername($pdo, $user_id, $username);
+        // update user list
+        return $this->index($pdo);
+    }
+
     public function askDeletion($pdo) {
         throw new Exception("Illegal access !");
         $user_id = (int)HttpHelper::getParam("user_id");

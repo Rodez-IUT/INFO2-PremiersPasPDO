@@ -25,6 +25,30 @@ class UsersService
     }
 
     /**
+     * @param $pdo
+     * @param $user_id the user_id of the search user
+     */
+    function findUserById($pdo, $userId) {
+        $sql = "select users.id as user_id, username, email, s.name as status, s.id as status_id 
+            from users join status s on users.status_id = s.id 
+            where users.id = ?";
+        $searchStmt = $pdo->prepare($sql);
+        $searchStmt->execute([$userId]);
+        return $searchStmt->fetch();
+    }
+
+    /**
+     * @param $pdo the pdo object
+     * @param $userId the user_id
+     * @param $username the new username
+     */
+    function saveUsername($pdo, $userId, $username) {
+        $sql = "update users set username = ? where users.id = ?";
+        $searchStmt = $pdo->prepare($sql);
+        $searchStmt->execute([$username, $userId]);
+    }
+
+    /**
      * @param $pdo \PDO the pdo object
      * @param $userId Int the id of the user to be deleted
      */

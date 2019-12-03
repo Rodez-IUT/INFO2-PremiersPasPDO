@@ -47,7 +47,7 @@ use yasmf\HttpHelper;
         <th>Username</th>
         <th>Email</th>
         <th>Status</th>
-<!--        <th></th>-->
+       <th></th>
     </tr>
     <?php while ($row = $searchStmt->fetch()) { ?>
         <tr>
@@ -55,11 +55,11 @@ use yasmf\HttpHelper;
             <td><?php echo $row['username'] ?></td>
             <td><?php echo $row['email'] ?></td>
             <td><?php echo $row['status'] ?></td>
-<!--            <td>-->
-<!--                --><?php //if ($row['status_id'] != 3) { ?>
-<!--                <a href="my_activities.php?status_id=3&user_id=--><?php //echo $row['user_id']?><!--&action=askDeletion">Ask deletion</a>-->
-<!--                --><?php //} ?>
-<!--            </td>-->
+            <td>
+                <?php if ($row['status_id'] != 3) { ?>
+                <a href="my_activities.php?status_id=3&user_id=<?php echo $row['user_id']?>&action=editUser">Edit</a>
+                <?php } ?>
+            </td>
         </tr>
     <?php } ?>
 </table>
