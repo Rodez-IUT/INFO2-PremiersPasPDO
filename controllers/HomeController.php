@@ -5,7 +5,7 @@ use services\UsersService;
 use yasmf\HttpHelper;
 use yasmf\View;
 
-class UsersController {
+class HomeController {
 
     private $usersService;
 
@@ -14,7 +14,7 @@ class UsersController {
         $this->usersService = UsersService::getDefaultUsersService();
     }
 
-    public function defaultAction($pdo) {
+    public function index($pdo) {
         $status_id = (int)HttpHelper::getParam('status_id') ?: 2 ;
         $start_letter = htmlspecialchars(HttpHelper::getParam('start_letter').'%') ?: '%';
         $searchStmt = $this->usersService->findUsersByUsernameAndStatus($pdo, $start_letter, $status_id) ;
@@ -28,7 +28,7 @@ class UsersController {
         // ask deletion
         $this->usersService->askUserDeletion($pdo, $user_id);
         // update user list
-        return defaultAction($pdo);
+        return $this->index($pdo);
     }
 
 }
