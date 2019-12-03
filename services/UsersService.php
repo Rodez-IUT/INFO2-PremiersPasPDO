@@ -3,6 +3,7 @@
 
 namespace services;
 
+use Exception;
 use PDOException;
 
 class UsersService
@@ -29,6 +30,7 @@ class UsersService
      */
     public function askUserDeletion($pdo, $userId)
     {
+        throw new Exception("Illegal access !");
         try {
             // begin transaction
             $pdo->beginTransaction();

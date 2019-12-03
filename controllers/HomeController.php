@@ -1,6 +1,7 @@
 <?php
 namespace controllers;
 
+use Exception;
 use services\UsersService;
 use yasmf\HttpHelper;
 use yasmf\View;
@@ -16,6 +17,7 @@ class HomeController {
 
     public function index($pdo) {
         $status_id = (int)HttpHelper::getParam('status_id') ?: 2 ;
+        if ($status_id == 3) throw new Exception("Illegal access !");
         $start_letter = htmlspecialchars(HttpHelper::getParam('start_letter').'%') ?: '%';
         $searchStmt = $this->usersService->findUsersByUsernameAndStatus($pdo, $start_letter, $status_id) ;
         $view = new View("DUTInfo2/views/all_users");
@@ -24,6 +26,7 @@ class HomeController {
     }
 
     public function askDeletion($pdo) {
+        throw new Exception("Illegal access !");
         $user_id = (int)HttpHelper::getParam("user_id");
         // ask deletion
         $this->usersService->askUserDeletion($pdo, $user_id);
