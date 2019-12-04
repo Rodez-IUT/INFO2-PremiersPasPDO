@@ -90,7 +90,7 @@ function askDeletion($pdo){
 <form action="all_users.php" method="get">
     <input hidden name="action" value="searchUsers">
     Start with letter:
-    <input name="start_letter" type="text" value="<?php echo $_GET["start_letter"] ?>">
+    <input name="start_letter" type="text" value="<?php echo get("start_letter") ?>">
     and status is:
     <select name="status_id">
         <option value="1" <?php if (get('status_id') == 1) echo 'selected' ?>>Waiting for account validation</option>
