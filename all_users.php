@@ -74,6 +74,7 @@ function askDeletion($pdo){
     $stmt2 = $pdo->prepare($sql2);
     $stmt2->execute([$user_id]);
     // update user
+    //throw new Exception("erreur !");
     $sql1 = "update users set status_id = 3 where id = ?";
     $stmt1 = $pdo->prepare($sql1);
     $stmt1->execute([$user_id]);
