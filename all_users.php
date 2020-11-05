@@ -21,7 +21,7 @@
 <?php
 
 $host = 'localhost';
-$port = '8889';
+$port = '8889'; // 3306 ?
 $db = 'my_activities';
 $user = 'root';
 $pass = 'root';
