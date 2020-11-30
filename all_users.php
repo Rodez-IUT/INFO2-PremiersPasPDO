@@ -66,18 +66,27 @@ function searchUsers($pdo){
     $searchStmt->execute(['start_letter' => $start_letter, 'status_id' => $status_id]);
 }
 
-function askDeletion($pdo){
-    $user_id = (int)get("user_id");
-    // insert log
-    $sql2 = "insert into action_log (action_date, action_name, user_id) 
-              values (CURRENT_TIME(),'askDeletion',?)";
-    $stmt2 = $pdo->prepare($sql2);
-    $stmt2->execute([$user_id]);
-    // update user
-    throw new Exception("erreur !");
-    $sql1 = "update users set status_id = 3 where id = ?";
-    $stmt1 = $pdo->prepare($sql1);
-    $stmt1->execute([$user_id]);
+function askDeletion($pdo) {
+    $user_id = (int)$_GET["user_id"];
+    try {
+        // begin transaction
+        $pdo->beginTransaction();
+        // insert log
+        $sql2 = "insert into action_log (action_date, action_name, user_id) 
+              values (CURRENT_TIME(),'askDeletion',?)" ;
+        $stmt2 = $pdo->prepare($sql2);
+        $stmt2->execute([$user_id]);
+        // update user
+        $sql1 = "update users set status_id = 3 where id = ?";
+        $stmt1 = $pdo->prepare($sql1);
+        $stmt1->execute([$user_id]);
+        // commit transaction
+        $pdo->commit();
+    } catch (PDOException $e) {
+        $pdo->rollBack();
+        echo $e->getMessage();
+        throw new PDOException($e->getMessage(), (int)$e->getCode());
+    }
     // update user list
     searchUsers($pdo);
 }
