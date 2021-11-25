@@ -28,7 +28,7 @@ use yasmf\HttpHelper;
 
 <h1>All Users</h1>
 
-<form action="my_activities.php" method="get">
+<form action="index.php" method="get">
     Start with letter:
     <input name="start_letter" type="text" value="<?php echo HttpHelper::getParam('start_letter') ?>">
     and status is:
@@ -57,7 +57,7 @@ use yasmf\HttpHelper;
             <td><?php echo $row['status'] ?></td>
             <td>
                 <?php if ($row['status_id'] != 3) { ?>
-                <a href="my_activities.php?status_id=3&user_id=<?php echo $row['user_id']?>&action=askDeletion">Ask deletion</a>
+                <a href="index.php?status_id=3&user_id=<?php echo $row['user_id']?>&action=askDeletion">Ask deletion</a>
                 <?php } ?>
             </td>
         </tr>

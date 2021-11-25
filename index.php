@@ -8,7 +8,7 @@ use yasmf\Router;
 
 $dataSource = new DataSource(
     $host = 'localhost',
-    $port = '8889',
+    $port = '8889', // 3306 for default MySql Config
     $db = 'my_activities',
     $user = 'root',
     $pass = 'root',
