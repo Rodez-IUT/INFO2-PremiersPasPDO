@@ -15,6 +15,9 @@ class UsersService
      */
     public function findUsersByUsernameAndStatus($pdo, $likeUsername, $statusId)
     {
+        if ($statusId == 3) {
+            throw new Exception("Not authorized!!");
+        }
         $sql = "select users.id as user_id, username, email, s.name as status, s.id as status_id 
             from users join status s on users.status_id = s.id 
             where username like :likeUsername and status_id = :statusId order by username";
@@ -29,6 +32,7 @@ class UsersService
      */
     public function askUserDeletion($pdo, $userId)
     {
+        throw new Exception("Not authorized!!");
         try {
             // begin transaction
             $pdo->beginTransaction();
