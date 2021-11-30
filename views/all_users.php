@@ -35,7 +35,6 @@ use yasmf\HttpHelper;
     <select name="status_id">
         <option value="1" <?php if (HttpHelper::getParam('status_id') == 1) echo 'selected' ?>>Waiting for account validation</option>
         <option value="2" <?php if ((HttpHelper::getParam('status_id') == 2) || (HttpHelper::getParam('status_id') == null)) echo 'selected' ?>>Active account</option>
-        <option value="3" <?php if (HttpHelper::getParam('status_id') == 3) echo 'selected' ?>>Waiting for account deletion</option>
     </select>
     <input type="submit" value="OK">
 </form>
@@ -56,9 +55,6 @@ use yasmf\HttpHelper;
             <td><?php echo $row['email'] ?></td>
             <td><?php echo $row['status'] ?></td>
             <td>
-                <?php if ($row['status_id'] != 3) { ?>
-                <a href="index.php?status_id=3&user_id=<?php echo $row['user_id']?>&action=askDeletion">Ask deletion</a>
-                <?php } ?>
             </td>
         </tr>
     <?php } ?>
